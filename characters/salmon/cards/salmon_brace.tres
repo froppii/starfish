@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dhbgulmnybamo"]
+
+[ext_resource type="Script" uid="uid://bd4n2pkxp4kkk" path="res://custom_resources/card.gd" id="1_j67ye"]
+
+[resource]
+script = ExtResource("1_j67ye")
+id = "salmon_snap_attack"
+target = 1
+metadata/_custom_type_script = "uid://bd4n2pkxp4kkk"
