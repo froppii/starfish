@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dyg8gsqwndcx"]
+
+[ext_resource type="Texture2D" uid="uid://cymbi2wk5fxyh" path="res://assets/background.png" id="1_mqutd"]
+
+[node name="Battle" type="Node2D" unique_id=474379928]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=989830079]
+modulate = Color(0.6323955, 0.63239557, 0.6323955, 1)
+texture = ExtResource("1_mqutd")
+centered = false

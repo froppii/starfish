@@ -11,8 +11,19 @@ config_version=5
 [application]
 
 config/name="starfish"
+run/main_scene="uid://dyg8gsqwndcx"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[layer_names]
+
+2d_physics/layer_1="card_target_selector"
+2d_physics/layer_2="card_drop_area"
 
 [physics]
 
