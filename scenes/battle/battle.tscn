@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bxa4cxq0jjx8o" path="res://scenes/ui/hand.gd" id="2_xd4uy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffvsa"]
-size = Vector2(1280, 525)
+size = Vector2(1280, 483)
 
 [node name="Battle" type="Node2D" unique_id=474379928]
 metadata/_edit_lock_ = true
@@ -20,7 +20,7 @@ metadata/_edit_lock_ = true
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea" unique_id=438220103]
-position = Vector2(640, 262.5)
+position = Vector2(640, 241.5)
 shape = SubResource("RectangleShape2D_ffvsa")
 
 [node name="BattleUI" type="CanvasLayer" parent="." unique_id=1543102570 groups=["ui_layer"]]
