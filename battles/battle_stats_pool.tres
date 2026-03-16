@@ -1,0 +1,182 @@
+[gd_resource type="Resource" script_class="BattleStatsPool" format=3 uid="uid://by8ka073e8sah"]
+
+[ext_resource type="Script" uid="uid://ekxf7q3x2vru" path="res://custom_resources/battle_stats_pool.gd" id="1_c0dve"]
+[ext_resource type="Script" uid="uid://bo2yy3tbqpsl" path="res://custom_resources/battle_stats.gd" id="1_k3ygp"]
+[ext_resource type="Resource" uid="uid://b8n7n2ldcvb0c" path="res://battles/tier_0_bats2.tres" id="1_udfgr"]
+[ext_resource type="Resource" uid="uid://btgxo6ksfx835" path="res://battles/tier_0_crab.tres" id="2_7sd42"]
+[ext_resource type="Resource" uid="uid://rscs8yna3uyj" path="res://battles/tier_1_bats3.tres" id="3_p408a"]
+[ext_resource type="Resource" uid="uid://d0rjtrdkgl628" path="res://battles/tier_1_bat_crab.tres" id="4_yjlu3"]
+[ext_resource type="PackedScene" uid="uid://d0efyathkfg74" path="res://scenes/enemy/enemy.tscn" id="6_smtvb"]
+[ext_resource type="Script" uid="uid://barodhbbtiqbj" path="res://scenes/enemy/enemy_action_picker.gd" id="7_6x4eu"]
+[ext_resource type="Texture2D" uid="uid://cn2c1psh561cc" path="res://art/tile_0127.png" id="8_r64ow"]
+[ext_resource type="Script" uid="uid://dxgwh7ui04omh" path="res://custom_resources/intent.gd" id="9_imvag"]
+[ext_resource type="AudioStream" uid="uid://cstj1hr07knm" path="res://art/enemy_block.ogg" id="10_jfc4n"]
+[ext_resource type="Texture2D" uid="uid://cul5qoemvh5nu" path="res://art/attack_negative.png" id="11_pqmnr"]
+[ext_resource type="AudioStream" uid="uid://dpetsnyk48bx2" path="res://art/enemy_attack.ogg" id="12_iajyq"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="13_pbp3f"]
+[ext_resource type="Script" uid="uid://cqw6nj5nsigxl" path="res://custom_resources/enemy_stats.gd" id="14_avrxc"]
+
+[sub_resource type="GDScript" id="GDScript_hfjhm"]
+script/source = "extends EnemyAction
+
+const MUSCLE_STATUS = preload(\"res://statuses/muscle.tres\")
+
+@export var stacks_per_action := 2
+
+var hp_threshold := 25
+var usages := 0
+
+
+func is_performable() -> bool:
+	var hp_under_threshold := enemy.stats.health <= hp_threshold
+	
+	if usages == 0 or (usages == 1 and hp_under_threshold):
+		return true
+	
+	return false
+
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return
+	
+	usages += 1
+	var status_effect := StatusEffect.new()
+	var muscle := MUSCLE_STATUS.duplicate()
+	muscle.stacks = stacks_per_action
+	status_effect.status = muscle
+	status_effect.execute([enemy])
+	
+	SFXPlayer.play(sound)
+
+	Events.enemy_action_completed.emit(enemy)
+"
+
+[sub_resource type="Resource" id="Resource_3vwu6"]
+script = ExtResource("9_imvag")
+icon = ExtResource("8_r64ow")
+
+[sub_resource type="GDScript" id="GDScript_hnmhw"]
+script/source = "extends EnemyAction
+
+const TOXIN = preload(\"res://common_cards/toxin.tres\")
+
+@export var damage := 8
+
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return
+	
+	var player := target as Player
+	if not player:
+		return
+	
+	var tween := create_tween().set_trans(Tween.TRANS_QUINT)
+	var start := enemy.global_position
+	var end := target.global_position + Vector2.RIGHT * 32
+	var damage_effect := DamageEffect.new()
+	var target_array: Array[Node] = [target]
+	var modified_dmg := enemy.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_DEALT)
+	
+	damage_effect.amount = modified_dmg
+	damage_effect.sound = sound
+	
+	tween.tween_property(enemy, \"global_position\", end, 0.4)
+	tween.tween_callback(damage_effect.execute.bind(target_array))
+	tween.tween_callback(player.stats.draw_pile.add_card.bind(TOXIN.duplicate()))
+	tween.tween_interval(0.25)
+	tween.tween_property(enemy, \"global_position\", start, 0.4)
+	
+	tween.finished.connect(
+		func():
+			Events.enemy_action_completed.emit(enemy)
+	)
+
+
+func update_intent_text() -> void:
+	var player := target as Player
+	if not player:
+		return
+	
+	var modified_dmg := player.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+	var final_dmg := enemy.modifier_handler.get_modified_value(modified_dmg, Modifier.Type.DMG_DEALT)
+	intent.current_text = intent.base_text % final_dmg
+"
+
+[sub_resource type="Resource" id="Resource_ge4s4"]
+script = ExtResource("9_imvag")
+base_text = "%s"
+icon = ExtResource("11_pqmnr")
+
+[sub_resource type="GDScript" id="GDScript_qxpsu"]
+script/source = "extends EnemyAction
+
+@export var block := 10
+
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return
+	
+	var block_effect := BlockEffect.new()
+	block_effect.amount = block
+	block_effect.sound = sound
+	block_effect.execute([enemy])
+	
+	get_tree().create_timer(0.6, false).timeout.connect(
+		func():
+			Events.enemy_action_completed.emit(enemy)
+	)
+"
+
+[sub_resource type="Resource" id="Resource_k3ixc"]
+script = ExtResource("9_imvag")
+icon = ExtResource("13_pbp3f")
+
+[sub_resource type="PackedScene" id="PackedScene_1j11j"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("ToxicGhostAI", "Node", "script", "MuscleBuffAction", "Node", "script", "intent", "sound", "AttackAction", "Node", "script", "intent", "sound", "type", "chance_weight", "BlockAction", "Node", "script", "intent", "sound", "type", "chance_weight"),
+"node_count": 4,
+"node_ids": PackedInt32Array(0, 0, 0, 0),
+"node_paths": [NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 3, 5, 1, 6, 2, 7, 3, 0, 1073741825, 0, 9, 8, -1, 5, 10, 4, 11, 5, 12, 6, 13, 7, 14, 8, 0, 1073741826, 0, 16, 15, -1, 5, 17, 9, 18, 10, 19, 11, 20, 12, 21, 13, 0),
+"variants": [ExtResource("7_6x4eu"), SubResource("GDScript_hfjhm"), SubResource("Resource_3vwu6"), ExtResource("10_jfc4n"), SubResource("GDScript_hnmhw"), SubResource("Resource_ge4s4"), ExtResource("12_iajyq"), 1, 6.5, SubResource("GDScript_qxpsu"), SubResource("Resource_k3ixc"), ExtResource("10_jfc4n"), 1, 3.5],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_nqubi"]
+script = ExtResource("14_avrxc")
+ai = SubResource("PackedScene_1j11j")
+max_health = 40
+
+[sub_resource type="PackedScene" id="PackedScene_3ju4p"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("Tier2ToxicGhost", "Node2D", "Enemy", "position", "stats"),
+"node_count": 2,
+"node_ids": PackedInt32Array(0, 0),
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 1073741824, 0, 2147483647, 2, 0, 2, 3, 1, 4, 2, 0),
+"variants": [ExtResource("6_smtvb"), Vector2(207, 76), SubResource("Resource_nqubi")],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_adkg8"]
+script = ExtResource("1_k3ygp")
+battle_tier = 2
+weight = 1.0
+gold_reward_min = 20
+gold_reward_max = 40
+enemies = SubResource("PackedScene_3ju4p")
+
+[resource]
+script = ExtResource("1_c0dve")
+pool = Array[ExtResource("1_k3ygp")]([ExtResource("1_udfgr"), ExtResource("2_7sd42"), ExtResource("3_p408a"), ExtResource("4_yjlu3"), SubResource("Resource_adkg8")])

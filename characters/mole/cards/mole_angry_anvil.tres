@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://bcmktyqt2d7cm"]
+
+[ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_pimpa"]
+[ext_resource type="Script" uid="uid://xdheakd10mqi" path="res://characters/mole/cards/mole_angry_anvil.gd" id="2_4eugg"]
+
+[resource]
+script = ExtResource("2_4eugg")
+id = "warrior_angry_anvil"
+type = 1
+rarity = 1
+cost = 1
+icon = ExtResource("1_pimpa")
+tooltip_text = "[center]Gain [color=\"0044ff\"]%s[/color] block. Exhaust 1 random card.[/center]"

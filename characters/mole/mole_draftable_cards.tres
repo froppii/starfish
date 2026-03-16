@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://cno2mmhf4bjci"]
+
+[ext_resource type="Script" uid="uid://bg8nmus47b34h" path="res://custom_resources/card.gd" id="1_ynbwh"]
+[ext_resource type="Resource" uid="uid://d20gx8xpmgpdi" path="res://characters/mole/cards/mole_big_slam.tres" id="2_cxvka"]
+[ext_resource type="Resource" uid="uid://n3va254ct6b3" path="res://characters/mole/cards/mole_slash.tres" id="3_rb8jf"]
+[ext_resource type="Resource" uid="uid://cjmd5p8y455xc" path="res://characters/mole/cards/mole_trickster.tres" id="4_6fgp1"]
+[ext_resource type="Resource" uid="uid://cedsow628sq3y" path="res://characters/mole/cards/mole_sharp_knife.tres" id="5_rtfed"]
+[ext_resource type="Resource" uid="uid://bcmktyqt2d7cm" path="res://characters/mole/cards/mole_angry_anvil.tres" id="6_hi1e7"]
+[ext_resource type="Script" uid="uid://cx7pv6t0wf8e" path="res://custom_resources/card_pile.gd" id="7_a1rvb"]
+
+[resource]
+script = ExtResource("7_a1rvb")
+cards = Array[ExtResource("1_ynbwh")]([ExtResource("2_cxvka"), ExtResource("2_cxvka"), ExtResource("2_cxvka"), ExtResource("2_cxvka"), ExtResource("3_rb8jf"), ExtResource("3_rb8jf"), ExtResource("3_rb8jf"), ExtResource("3_rb8jf"), ExtResource("4_6fgp1"), ExtResource("5_rtfed"), ExtResource("5_rtfed"), ExtResource("5_rtfed"), ExtResource("6_hi1e7"), ExtResource("6_hi1e7"), ExtResource("6_hi1e7")])

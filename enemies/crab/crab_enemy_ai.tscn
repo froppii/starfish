@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dbk6y12yqgre"]
+
+[ext_resource type="Script" uid="uid://barodhbbtiqbj" path="res://scenes/enemy/enemy_action_picker.gd" id="1_pubwu"]
+[ext_resource type="Script" uid="uid://cn4e386s1su5h" path="res://enemies/crab/crab_attack_action.gd" id="2_dvmrv"]
+[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="3_ek0pi"]
+[ext_resource type="Script" uid="uid://b5lha1g7vw3rs" path="res://enemies/crab/crab_block_action.gd" id="3_mwt7u"]
+[ext_resource type="Script" uid="uid://b50ad54gu634d" path="res://enemies/crab/crab_mega_block_action.gd" id="4_5v028"]
+[ext_resource type="Script" uid="uid://dxgwh7ui04omh" path="res://custom_resources/intent.gd" id="4_vcx3h"]
+[ext_resource type="Texture2D" uid="uid://bi6pfjs32f820" path="res://art/tile_0101.png" id="6_1jsuk"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="8_xt5n4"]
+
+[sub_resource type="Resource" id="Resource_t5j5y"]
+script = ExtResource("4_vcx3h")
+base_text = "%s"
+icon = ExtResource("3_ek0pi")
+
+[sub_resource type="Resource" id="Resource_cidov"]
+script = ExtResource("4_vcx3h")
+base_text = "6"
+icon = ExtResource("6_1jsuk")
+
+[sub_resource type="Resource" id="Resource_fvhin"]
+script = ExtResource("4_vcx3h")
+base_text = "15"
+icon = ExtResource("8_xt5n4")
+
+[node name="CrabEnemyAI" type="Node" unique_id=514367969]
+script = ExtResource("1_pubwu")
+
+[node name="AttackAction" type="Node" parent="." unique_id=982322906]
+script = ExtResource("2_dvmrv")
+intent = SubResource("Resource_t5j5y")
+type = 1
+chance_weight = 1.0
+
+[node name="BlockAction" type="Node" parent="." unique_id=1778599830]
+script = ExtResource("3_mwt7u")
+intent = SubResource("Resource_cidov")
+type = 1
+chance_weight = 1.0
+
+[node name="MegaBlockAction" type="Node" parent="." unique_id=554964079]
+script = ExtResource("4_5v028")
+intent = SubResource("Resource_fvhin")

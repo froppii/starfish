@@ -1,0 +1,12 @@
+[gd_resource type="Resource" format=3 uid="uid://d4c8yfl4f4sat"]
+
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_gc0m6"]
+[ext_resource type="Script" uid="uid://b2y6h1qug8kas" path="res://characters/mole/cards/mole_block.gd" id="2_nom5x"]
+
+[resource]
+script = ExtResource("2_nom5x")
+id = "warrior_block"
+type = 1
+cost = 1
+icon = ExtResource("1_gc0m6")
+tooltip_text = "[center]Gain [color=\"0044ff\"]%s[/color] block.[/center]"

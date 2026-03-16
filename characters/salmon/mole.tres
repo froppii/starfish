@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://citl0y08w6hf7"]
+
+[ext_resource type="Texture2D" uid="uid://c6hicooh00v8w" path="res://assets/blob.png" id="1_2aiy3"]
+[ext_resource type="Script" uid="uid://cg405j0wwla6d" path="res://custom_resources/character_stats.gd" id="1_6ckyj"]
+
+[resource]
+script = ExtResource("1_6ckyj")
+cards_per_turn = 4
+max_mana = 3
+max_health = 25
+art = ExtResource("1_2aiy3")
+metadata/_custom_type_script = "uid://cg405j0wwla6d"

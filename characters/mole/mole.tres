@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://sbkc4o401k4l"]
+
+[ext_resource type="Texture2D" uid="uid://cn2ab3pevxscx" path="res://art/mole.png" id="1_m6top"]
+[ext_resource type="Resource" uid="uid://cno2mmhf4bjci" path="res://characters/mole/mole_draftable_cards.tres" id="2_bpnlf"]
+[ext_resource type="Script" uid="uid://cqu424271vmxm" path="res://custom_resources/character_stats.gd" id="4_dnn25"]
+[ext_resource type="Resource" uid="uid://dyyfi3rcfxyug" path="res://characters/mole/mole_starting_deck.tres" id="5_3qkm0"]
+[ext_resource type="Resource" uid="uid://dgsppvwlatlhw" path="res://relics/healing_potion.tres" id="6_tytad"]
+
+[resource]
+script = ExtResource("4_dnn25")
+character_name = "Warrior"
+description = "dig dig"
+portrait = ExtResource("1_m6top")
+starting_deck = ExtResource("5_3qkm0")
+draftable_cards = ExtResource("2_bpnlf")
+cards_per_turn = 4
+max_mana = 3
+starting_relic = ExtResource("6_tytad")
+max_health = 35
+art = ExtResource("1_m6top")

@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d30aqi80c1nrc"]
+
+[sub_resource type="Shader" id="Shader_x3e8y"]
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_x3e8y")

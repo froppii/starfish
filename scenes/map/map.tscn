@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cuwuwco4sf0y6"]
+
+[ext_resource type="Script" uid="uid://cgl0qapirjgcw" path="res://scenes/map/map.gd" id="1_l06hy"]
+[ext_resource type="Script" uid="uid://si8eyxb2gulk" path="res://scenes/map/map_generator.gd" id="2_0qmb6"]
+[ext_resource type="Resource" uid="uid://by8ka073e8sah" path="res://battles/battle_stats_pool.tres" id="3_cadnm"]
+[ext_resource type="Resource" uid="uid://bncylsfojpqyu" path="res://scenes/event_rooms/event_room_pool.tres" id="4_0q2ee"]
+[ext_resource type="Texture2D" uid="uid://bngufqexn4tv1" path="res://art/background3.png" id="5_fcby6"]
+
+[node name="Map" type="Node2D" unique_id=56312604]
+script = ExtResource("1_l06hy")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=1058499073]
+
+[node name="Lines" type="Node2D" parent="Visuals" unique_id=925430752]
+unique_name_in_owner = true
+
+[node name="Rooms" type="Node2D" parent="Visuals" unique_id=1282301995]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=326487874]
+offset = Vector2(128, 72)
+
+[node name="MapGenerator" type="Node" parent="." unique_id=99500967]
+script = ExtResource("2_0qmb6")
+battle_stats_pool = ExtResource("3_cadnm")
+event_room_pool = ExtResource("4_0q2ee")
+
+[node name="MapBackground" type="CanvasLayer" parent="." unique_id=922046687]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="MapBackground" unique_id=792701066]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fcby6")
+expand_mode = 2

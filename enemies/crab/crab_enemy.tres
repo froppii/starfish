@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bnmpwl3k8qb8n"]
+
+[ext_resource type="Script" uid="uid://cqw6nj5nsigxl" path="res://custom_resources/enemy_stats.gd" id="1_7mfl6"]
+[ext_resource type="PackedScene" uid="uid://dbk6y12yqgre" path="res://enemies/crab/crab_enemy_ai.tscn" id="1_x0e6g"]
+[ext_resource type="Texture2D" uid="uid://cyk7x4sgh7tyn" path="res://art/scorpion.png" id="2_phnif"]
+
+[resource]
+script = ExtResource("1_7mfl6")
+ai = ExtResource("1_x0e6g")
+max_health = 25
+art = ExtResource("2_phnif")

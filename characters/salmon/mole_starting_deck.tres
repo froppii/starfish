@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://c3n82lhol2t30"]
+
+[ext_resource type="Script" uid="uid://bd4n2pkxp4kkk" path="res://custom_resources/card.gd" id="1_alcw4"]
+[ext_resource type="Resource" uid="uid://ddnpairruiibk" path="res://characters/salmon/cards/mole_slash_attack.tres" id="2_0c0so"]
+[ext_resource type="Resource" uid="uid://dhbgulmnybamo" path="res://characters/salmon/cards/mole_brace.tres" id="3_psmrr"]
+[ext_resource type="Script" uid="uid://c886lfp3nlw4e" path="res://custom_resources/card_pile.gd" id="4_dp5bv"]
+
+[resource]
+script = ExtResource("4_dp5bv")
+cards = Array[ExtResource("1_alcw4")]([ExtResource("2_0c0so"), ExtResource("3_psmrr"), ExtResource("3_psmrr"), null, null])
+metadata/_custom_type_script = "uid://c886lfp3nlw4e"
